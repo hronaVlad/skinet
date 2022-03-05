@@ -1,0 +1,11 @@
+API - install microsoft.entityframeworkcore.tool, install microsoft.entityframeworkcore.design, Microsoft.EntityFrameworkCore.Sqlite
+EF  - install microsoft.entityframeworkcore.design, Microsoft.EntityFrameworkCore.Sqlite
+ create factory here
+
+
+
+Package Manager Console. Defeault project: EFModels
+
+Add-Migration InitialCreate2
+
+update-database
