@@ -1,4 +1,5 @@
-using EFModels.Contracts;
+using Core.Repositories.Contracts;
+using Core.Specifications.Product;
 using EFModels.Data;
 using EFModels.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +28,9 @@ public class ProductsController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<Product>>> GetProducts()
     {
-        var products = await _productRepository.GetAll();
+        var spec = new ProductWithTypesAndBrandsSpecification();
+
+        var products = await _productRepository.GetAll(spec);
 
         return Ok(products);
     }
@@ -35,7 +38,9 @@ public class ProductsController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<Product>> GetProduct(int id)
     {
-        var product = await _productRepository.GetById(id);
+        var spec = new ProductWithTypesAndBrandsSpecification(id);
+
+        var product = await _productRepository.GetWithSpec(spec);
 
         return Ok(product);
     }

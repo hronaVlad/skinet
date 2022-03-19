@@ -1,4 +1,5 @@
-using EFModels.Contracts;
+using Core.Repositories;
+using Core.Repositories.Contracts;
 using EFModels.Data;
 using Microsoft.EntityFrameworkCore;
 

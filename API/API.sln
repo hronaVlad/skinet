@@ -5,11 +5,13 @@ VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API.csproj", "{C6F447C2-05F7-460E-B5E5-E9C8B5CD36D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "..\Models\Models.csproj", "{04A4BDFB-EAA3-4613-989F-07B5DC350F01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "..\Models\Models.csproj", "{04A4BDFB-EAA3-4613-989F-07B5DC350F01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "..\Common\Common.csproj", "{A00250F5-3A89-45C1-AC3B-E9B9D298214A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "..\Common\Common.csproj", "{A00250F5-3A89-45C1-AC3B-E9B9D298214A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFModels", "..\EFModels\EFModels.csproj", "{E95CDC14-516D-4905-ABEE-69EA309ABDE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFModels", "..\EFModels\EFModels.csproj", "{E95CDC14-516D-4905-ABEE-69EA309ABDE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "..\Core\Core.csproj", "{3D60F6F8-E1C7-4E2B-886D-F3EDA3FFBE57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{E95CDC14-516D-4905-ABEE-69EA309ABDE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E95CDC14-516D-4905-ABEE-69EA309ABDE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E95CDC14-516D-4905-ABEE-69EA309ABDE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D60F6F8-E1C7-4E2B-886D-F3EDA3FFBE57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D60F6F8-E1C7-4E2B-886D-F3EDA3FFBE57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D60F6F8-E1C7-4E2B-886D-F3EDA3FFBE57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D60F6F8-E1C7-4E2B-886D-F3EDA3FFBE57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
