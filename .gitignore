@@ -2,3 +2,5 @@ obj
 bin
 *.db
 .vs
+.fake
+.ionide

@@ -2,6 +2,7 @@
 using EFModels.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFModels.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20220306104425_Added product type and brand")]
+    partial class Addedproducttypeandbrand
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.1");
@@ -24,12 +26,10 @@ namespace EFModels.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(180)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PictureUrl")
@@ -37,7 +37,7 @@ namespace EFModels.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<double>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("REAL");
 
                     b.Property<int>("ProductBrandId")
                         .HasColumnType("INTEGER");
