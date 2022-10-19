@@ -48,7 +48,8 @@ go to the sqllite explorer window
 				ng serve
 
 
-						ngx-bootstrap to read
+					bootstrap docs
+				https://getbootstrap.com/docs/5.2/examples/		
 				https://valor-software.com/ngx-bootstrap/#/		
 							
 						install packages
@@ -56,3 +57,11 @@ go to the sqllite explorer window
 				npm install ngx-bootstrap --save
 				npm install bootstrap
 				npm install font-awesome
+				
+								
+								
+			#VS code extensions
+			
+Angular Language Service
+Angular Snippets (Version 13)
+			
