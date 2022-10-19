@@ -39,9 +39,20 @@ select API/ski.db
 go to the sqllite explorer window
 
 
-			angular
-npm install -g @angular/cli
-ng new client	
-cd client
-ng serve		
-			
+			#client part
+
+						angular - init client dir 
+				npm install -g @angular/cli
+				ng new client	
+				cd client
+				ng serve
+
+
+						ngx-bootstrap to read
+				https://valor-software.com/ngx-bootstrap/#/		
+							
+						install packages
+						
+				npm install ngx-bootstrap --save
+				npm install bootstrap
+				npm install font-awesome
