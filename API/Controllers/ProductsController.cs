@@ -1,48 +1,56 @@
+using API.Infrastucture.Errors;
+using AutoMapper;
 using Core.Repositories.Contracts;
 using Core.Specifications.Product;
-using EFModels.Data;
 using EFModels.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Models.Product;
 
 namespace API.Controllers;
 
-[ApiController]
-[Route("api/[controller]")]
-public class ProductsController : ControllerBase
+public class ProductsController : BaseApiController
 {
     private readonly IGenericRepository<Product> _productRepository;
     private readonly IGenericRepository<ProductBrand> _productBrandRepository;
     private readonly IGenericRepository<ProductType> _productTypeRepository;
+    private readonly IMapper _mapper;
 
     public ProductsController(
         IGenericRepository<Product> productRepository,
         IGenericRepository<ProductBrand> productBrandRepository,
-        IGenericRepository<ProductType> productTypeRepository)
+        IGenericRepository<ProductType> productTypeRepository,
+        IMapper mapper)
     {
         this._productRepository = productRepository;
         this._productBrandRepository = productBrandRepository;
         this._productTypeRepository = productTypeRepository;
+        this._mapper = mapper;
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Product>>> GetProducts()
+    public async Task<ActionResult<List<ProductToReturnDto>>> GetProducts([FromQuery]ProductSpecParams productParams)
     {
-        var spec = new ProductWithTypesAndBrandsSpecification();
+        var spec = new ProductWithTypesAndBrandsSpecification(productParams);
 
         var products = await _productRepository.GetAll(spec);
 
-        return Ok(products);
+        return Ok(_mapper
+            .Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products));
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Product>> GetProduct(int id)
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
     {
         var spec = new ProductWithTypesAndBrandsSpecification(id);
 
         var product = await _productRepository.GetWithSpec(spec);
 
-        return Ok(product);
+        if (product == null) return NotFound(new ApiResponse(404));
+
+        return Ok(_mapper
+            .Map<Product, ProductToReturnDto>(product));
     }
 
     [HttpGet("brands")]

@@ -1,7 +1,9 @@
-using Core.Repositories;
-using Core.Repositories.Contracts;
+using API.Infrastucture.Errors.Middlewares;
 using EFModels.Data;
 using Microsoft.EntityFrameworkCore;
+using API.Infrastucture.Extensions;
+using API.Mappers;
+using EFModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,9 +13,8 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<StoreContext>(_ => _.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-//builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddAutoMapper(typeof(MappingProfiles));
+builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 
@@ -34,13 +35,17 @@ using(var scope = app.Services.CreateAsyncScope()){
 
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+app.UseMiddleware<ErrorMiddleware>();
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
+app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
 app.UseHttpsRedirection();
+
+app.UseStaticFiles();
 
 app.UseAuthorization();
 

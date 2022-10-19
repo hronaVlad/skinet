@@ -21,5 +21,19 @@ namespace Core.Specifications
         {
             this.Includes.Add(include);
         }
+
+        public Expression<Func<T, object>> OrderBy  {get; private set;}
+        public Expression<Func<T, object>> OrderByDesc {get; private set;}
+        protected void AddOrderBy(Expression<Func<T, object>> orderByExpression)  => this.OrderBy = orderByExpression;
+        protected void AddOrderByDesc(Expression<Func<T, object>> orderByDescExpression)  => this.OrderByDesc = orderByDescExpression;
+
+        
+        protected void ApplyPaging(int pageIndex, int pageSize) {
+            this.Take = pageSize;
+            this.Skip = (pageIndex - 1) * pageSize;
+        }
+
+        public int Take { get; private set; }
+        public int Skip  { get; private set; }
     }
 }

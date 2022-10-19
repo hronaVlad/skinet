@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using P = EFModels.Entities.Product;
+﻿using P = EFModels.Entities.Product;
 
 namespace Core.Specifications.Product
 {
@@ -12,7 +6,15 @@ namespace Core.Specifications.Product
     {
         public ProductWithTypesAndBrandsSpecification()
         {
+        }
+
+        public ProductWithTypesAndBrandsSpecification(ProductSpecParams productSpecParams) 
+            : base (_ => (!productSpecParams.BrandId.HasValue || _.ProductBrandId == productSpecParams.BrandId.Value) &&
+                         (!productSpecParams.TypeId.HasValue || _.ProductTypeId == productSpecParams.TypeId.Value))
+        {
             Include();
+            Sort(productSpecParams);
+            ApplyPaging(productSpecParams.PageIndex, productSpecParams.PageSize);
         }
 
         public ProductWithTypesAndBrandsSpecification(int id) 
@@ -25,5 +27,25 @@ namespace Core.Specifications.Product
             AddInclude(_ => _.ProductType);
             AddInclude(_ => _.ProductBrand);
         }
+
+        private void Sort(ProductSpecParams productSpecParams) {
+            if (string.IsNullOrEmpty(productSpecParams.Sort))
+                productSpecParams.Sort = "name";
+
+            switch (productSpecParams.Sort) {
+                case "priceAsc":
+                    AddOrderBy(_ => _.Price);
+                    break;
+                case "priceDesc":
+                    AddOrderByDesc(_ => _.Price);
+                    break;
+                case "name":
+                    AddOrderBy(_ => _.Name);
+                    break;
+                default:
+                    AddOrderBy(_ => _.Id);
+                    break;
+            }
+        }  
     }
 }
