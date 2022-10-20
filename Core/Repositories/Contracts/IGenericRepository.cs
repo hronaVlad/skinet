@@ -9,5 +9,6 @@ namespace Core.Repositories.Contracts
         Task<T> GetWithSpec(ISpecification<T> spec);
         Task<IReadOnlyList<T>> GetAll();
         Task<IReadOnlyList<T>> GetAll(ISpecification<T> spec);
+        Task<int> CountAsync(ISpecification<T> spec);
     }
 }

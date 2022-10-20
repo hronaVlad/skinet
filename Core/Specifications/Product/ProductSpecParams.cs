@@ -20,5 +20,6 @@ namespace Core.Specifications.Product
 
         public int? BrandId { get;set; }
         public int? TypeId { get;set; }
+        public string? Search { get; internal set; }
     }
 }

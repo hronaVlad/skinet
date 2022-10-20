@@ -64,4 +64,8 @@ go to the sqllite explorer window
 			
 Angular Language Service
 Angular Snippets (Version 13)
+
+
+source on github
+https://github.com/TryCatchLearn/Skinet/blob/main/API/Startup.cs
 			
