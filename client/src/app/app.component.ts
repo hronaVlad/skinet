@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,17 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent  implements OnInit{
   title = 'Hello, Кате';
-  products: any[] = [];
 
-  constructor(private client: HttpClient) {
+  constructor() {}
 
-  }
-
-  ngOnInit(): void {
-    this.client.get('https://localhost:7154/api/products?pageSize=30').subscribe( (response: any) => {
-      this.products = response.data;
-      console.log(response);
-    },
-    error => console.log(error));
-  }
+  ngOnInit(): void {}
 }

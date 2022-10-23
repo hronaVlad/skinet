@@ -29,6 +29,7 @@ public class ProductsController : BaseApiController
     }
 
     [HttpGet]
+    [ProducesResponseType(typeof(Pagination<ProductToReturnDto>), 200)]
     public async Task<ActionResult<List<ProductToReturnDto>>> GetProducts([FromQuery]ProductSpecParams productParams)
     {
         var spec = new ProductWithTypesAndBrandsSpecification(productParams);

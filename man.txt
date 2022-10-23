@@ -3,7 +3,6 @@ EF  - install microsoft.entityframeworkcore.design, Microsoft.EntityFrameworkCor
  create factory here
 
 
-
 Package Manager Console. Defeault project: EFModels
 
 Add-Migration InitialCreate2
@@ -11,14 +10,7 @@ Add-Migration InitialCreate2
 update-database
 
 
-
-			how to run the project in visual code:
-code D:\console\skinet
-cd ./API
-dotnet run
-
-
-			how to work with db in visual code:
+			#how to work with db in visual code:
 
 dotnet tool list -g
 
@@ -41,7 +33,6 @@ go to the sqllite explorer window
 
 			#client part
 
-						angular - init client dir 
 				npm install -g @angular/cli
 				ng new client	
 				cd client
@@ -60,12 +51,22 @@ go to the sqllite explorer window
 				
 								
 								
-			#VS code extensions
-			
-Angular Language Service
-Angular Snippets (Version 13)
+			#VS code extensions to install
+				Angular Language Service
+				Angular Snippets (Version 13)
 
 
-source on github
-https://github.com/TryCatchLearn/Skinet/blob/main/API/Startup.cs
+			# source on github
+				https://github.com/TryCatchLearn/Skinet/blob/main/API/Startup.cs
 			
+			
+			# run projects
+				cd API
+				dotnet watch run
+			
+			cd client
+			ng serve
+			
+
+			# links
+			http://json2ts.com/

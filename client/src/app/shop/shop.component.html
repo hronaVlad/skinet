@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="row">
+        <section class="col-3">
+
+            <h5 class="ms-3 text-warning">Sort</h5>
+            <select class="form-select mb-3">
+                <option selected>A-Z</option>
+                <option>Price: Low to High</option>
+                <option>Price: High to Low</option>
+            </select>
+
+            <h5 class="ms-3 text-warning">Brands</h5>
+            <ul class="list-group my-3">
+                <li class="list-group-item">An item</li>
+                <li class="list-group-item">A second item</li>
+                <li class="list-group-item">A third item</li>
+                <li class="list-group-item">A fourth item</li>
+                <li class="list-group-item">And a fifth one</li>
+            </ul>
+            <h5 class="ms-3 text-warning">Types</h5>
+            <ul class="list-group my-3">
+                <li class="list-group-item">An item</li>
+                <li class="list-group-item">A second item</li>
+                <li class="list-group-item">A third item</li>
+                <li class="list-group-item">A fourth item</li>
+                <li class="list-group-item">And a fifth one</li>
+            </ul>
+        </section>
+        <section class="col-9">
+
+            <div class="d-flex justify-content-between aling-center pb-2">
+                <header>
+                    <span>Showing <strong>10</strong> of <strong>16</strong> Results</span>
+                </header>
+
+                <form class="row g-1">
+                    <div class="col-auto">
+                        <input class="form-control me-2" style="width: 300px" placeholder="Search" type="text">
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-outline-primary">Search</button>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-outline-success">Reset</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="col" *ngFor="let item of products">
+                    <app-product-item [product]="item"></app-product-item>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
