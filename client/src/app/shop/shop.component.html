@@ -3,27 +3,23 @@
         <section class="col-3">
 
             <h5 class="ms-3 text-warning">Sort</h5>
-            <select class="form-select mb-3">
-                <option selected>A-Z</option>
-                <option>Price: Low to High</option>
-                <option>Price: High to Low</option>
+            <select class="form-select mb-3"  (change)="onSortSelected($event.target.value)">
+                <option *ngFor="let item of sortOptions" [value]="item.value">
+                    {{item.name}}
+                </option>
             </select>
 
             <h5 class="ms-3 text-warning">Brands</h5>
             <ul class="list-group my-3">
-                <li class="list-group-item">An item</li>
-                <li class="list-group-item">A second item</li>
-                <li class="list-group-item">A third item</li>
-                <li class="list-group-item">A fourth item</li>
-                <li class="list-group-item">And a fifth one</li>
+                <li class="list-group-item" *ngFor="let item of brands" (click)="onBrandIdSelected(item.id)" [ngClass]="item.id === brandIdSelected ? 'selected-list-item' : ''">
+                    {{item.name}}
+                </li>
             </ul>
             <h5 class="ms-3 text-warning">Types</h5>
             <ul class="list-group my-3">
-                <li class="list-group-item">An item</li>
-                <li class="list-group-item">A second item</li>
-                <li class="list-group-item">A third item</li>
-                <li class="list-group-item">A fourth item</li>
-                <li class="list-group-item">And a fifth one</li>
+                <li class="list-group-item" *ngFor="let item of types" (click)="onTypeIdSelected(item.id)" [ngClass]="item.id === typeIdSelected ? 'selected-list-item' : ''">
+                    {{item.name}}
+                </li>
             </ul>
         </section>
         <section class="col-9">

@@ -37,11 +37,7 @@ go to the sqllite explorer window
 				ng new client	
 				cd client
 				ng serve
-
-
-					bootstrap docs
-				https://getbootstrap.com/docs/5.2/examples/		
-				https://valor-software.com/ngx-bootstrap/#/		
+	
 							
 						install packages
 						
@@ -70,3 +66,9 @@ go to the sqllite explorer window
 
 			# links
 			http://json2ts.com/
+			
+			
+
+	bootstrap docs
+https://getbootstrap.com/docs/5.2/examples/		
+https://valor-software.com/ngx-bootstrap/#/				
