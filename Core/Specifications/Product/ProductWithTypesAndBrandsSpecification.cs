@@ -10,7 +10,8 @@ namespace Core.Specifications.Product
 
         public ProductWithTypesAndBrandsSpecification(ProductSpecParams productSpecParams) 
             : base (_ => (!productSpecParams.BrandId.HasValue || _.ProductBrandId == productSpecParams.BrandId.Value) &&
-                         (!productSpecParams.TypeId.HasValue || _.ProductTypeId == productSpecParams.TypeId.Value))
+                         (!productSpecParams.TypeId.HasValue || _.ProductTypeId == productSpecParams.TypeId.Value) &&
+                         (string.IsNullOrEmpty(productSpecParams.Search) || _.Name.ToLower().Contains(productSpecParams.Search.ToLower())))
         {
             Include();
             Sort(productSpecParams);

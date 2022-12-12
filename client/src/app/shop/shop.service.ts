@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { Brand } from '../shared/models/brands';
 import { Type } from '../shared/models/types';
 import { Pagination } from '../shared/models/pagination';
+import { ProductFilterParams } from '../shared/models/productFilterParms';
 
 @Injectable({
   providedIn: 'root'
@@ -13,21 +14,24 @@ export class ShopService {
 
   constructor(private client: HttpClient) { }
 
-  getProducts(typeId?: number, brandId?: number, sortSelected?: string): Observable<Pagination> {
-    let params = new HttpParams()
-      .set('pageSize', 10);
+  getProducts(filterParams: ProductFilterParams): Observable<Pagination> {
+    let params = new HttpParams();
 
-    if (typeId) {
-      params = params.set('typeId', typeId);
+    if (filterParams.typeId > 0) {
+      params = params.set('typeId', filterParams.typeId);
     }
 
-    if (brandId) {
-      params = params.set('brandId', brandId);
+    if (filterParams.brandId > 0) {
+      params = params.set('brandId', filterParams.brandId);
     }
 
-    if (sortSelected) {
-      params = params.set('sort', sortSelected);
+    if (filterParams.search) {
+      params = params.set('search', filterParams.search);
     }
+
+    params = params.set('sort', filterParams.sort);
+    params = params.set('pageIndex', filterParams.pageIndex);
+    params = params.set('pageSize', filterParams.pageSize);
 
     return this.client.get<Pagination>(this.url + 'products', { observe: 'body', params: params });
   } 
@@ -37,7 +41,6 @@ export class ShopService {
   }
 
   getBrands(): Observable<Brand[]> {
-    // return of(['addidas', 'nike', 'newbalance']);
     return this.client.get<Brand[]>(this.url + 'products/brands');
   }
 }
