@@ -5,3 +5,5 @@ bin
 .fake
 .ionide
 *.bak
+.db-wal
+.db-shm
