@@ -1,14 +1,14 @@
 
     <header>
       <div class="d-flex flex-column flex-md-row align-items-center justify-content-between 
-      p-3 mb-3 border-bottom shadow-sm fixed-top">
+      p-3 mb-3 border-bottom shadow-sm fixed-top bg-white">
         
-        <img src="/assets/images/logo.png" style="max-height: 70px" alt="logo" routerLink="/">
+        <img src="/assets/images/logo.png" style="max-height: 70px" alt="logo" class="logo" routerLink="/">
   
         <nav class="my-2 my-md-0 mr-md-3 text-uppercase" style="font-size:larger">
-          <a class="me-3 py-2 text-dark text-decoration-none" [routerLink]="['/']" >Home</a>
-          <a class="me-3 py-2 text-dark text-decoration-none" routerLink="/shop">Shop</a>
-          <a class="me-3 py-2 text-dark text-decoration-none" routerLink="/contacts">Contact</a>
+          <a class="me-3 py-2" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+          <a class="me-3 py-2" routerLink="/shop" routerLinkActive="active">Shop</a>
+          <a class="me-3 py-2" routerLink="/contacts">Contact</a>
         </nav>
 
         <div class="d-flex align-items-center">

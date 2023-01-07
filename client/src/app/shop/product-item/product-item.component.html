@@ -1,5 +1,5 @@
 <div class="card h-100 shadow-sm">
-    <img [src]="product.pictureUrl" [alt]="product.name" class="img-fluid bg-info">
+    <img routerLink="/shop/{{product.id}}" style="cursor:pointer" [src]="product.pictureUrl" [alt]="product.name" class="img-fluid bg-info">
 
     <div class="card-body">
         <a routerLink="/shop/{{product.id}}" class="text-decoration-none">

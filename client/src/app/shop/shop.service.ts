@@ -5,6 +5,7 @@ import { Brand } from '../shared/models/brands';
 import { Type } from '../shared/models/types';
 import { Pagination } from '../shared/models/pagination';
 import { ProductFilterParams } from '../shared/models/productFilterParms';
+import { Product } from '../shared/models/product';
 
 @Injectable({
   providedIn: 'root'
@@ -42,5 +43,9 @@ export class ShopService {
 
   getBrands(): Observable<Brand[]> {
     return this.client.get<Brand[]>(this.url + 'products/brands');
+  }
+
+  getProduct(id: number): Observable<Product> {
+    return this.client.get<Product>(this.url + 'products/' + id);
   }
 }
