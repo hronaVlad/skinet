@@ -1,0 +1,13 @@
+
+<div class="container mt-5">
+    <button (click)="get500()" class="btn btn-outline-primary">500</button>
+    <button (click)="get400()" class="btn btn-outline-primary ms-3">400</button>
+    <button (click)="get404()" class="btn btn-outline-primary ms-3">404</button>
+    <button (click)="get404Validation()" class="btn btn-outline-primary ms-3">404 validation</button>
+
+    <div class="row mt-5" *ngIf="validationError">
+        <ul class="text-danger">
+            <li>{{validationError}}</li>
+        </ul>
+    </div>
+</div>
