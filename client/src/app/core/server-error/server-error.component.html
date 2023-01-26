@@ -1,3 +1,8 @@
 <div class="container">
-    <h1>Internal server error</h1>
+    <h1>Internal server error - refreshing the page will make the exception dissapear</h1>
+
+    <div *ngIf="error">
+        <h4 class="text-danger">{{error.message}}</h4>
+        <div>{{error.details}}</div>
+    </div>
 </div>

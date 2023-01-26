@@ -7,18 +7,20 @@ import { ServerErrorComponent } from './server-error/server-error.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptorInterceptor } from './error-interceptor.interceptor';
 import { ToastrModule } from 'ngx-toastr';
+import { SectionHeaderComponent } from './section-header/section-header.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 @NgModule({
-  declarations: [NavBarComponent, NotFoundComponent, ServerErrorComponent],
+  declarations: [NavBarComponent, NotFoundComponent, ServerErrorComponent, SectionHeaderComponent, BreadcrumbComponent],
   imports: [
     CommonModule,
     RouterModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true
-    })
+    }),
   ],
-  exports: [NavBarComponent],
+  exports: [NavBarComponent, SectionHeaderComponent],
   providers: [ {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorInterceptor, multi: true}
   ]
 })

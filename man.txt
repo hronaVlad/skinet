@@ -73,3 +73,6 @@ go to the sqllite explorer window
 https://getbootstrap.com/docs/5.2/examples/		
 https://valor-software.com/ngx-bootstrap/#/				
 https://getbootstrap.com/docs/5.0/utilities/spacing/
+
+primeng
+https://www.primefaces.org/primeng-v14/breadcrumb
