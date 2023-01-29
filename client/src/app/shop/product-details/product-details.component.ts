@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BreadcrumbService } from 'src/app/core/breadcrumb.service';
+import { OnBreadcrumbUpdate } from 'src/app/core/breadcrumb/breadcrumbUpdater';
 import { Product } from 'src/app/shared/models/product';
 import { ShopService } from '../shop.service';
 
@@ -9,7 +10,7 @@ import { ShopService } from '../shop.service';
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss']
 })
-export class ProductDetailsComponent implements OnInit {
+export class ProductDetailsComponent implements OnInit, OnBreadcrumbUpdate {
 
   product: Product;
 
@@ -27,14 +28,13 @@ export class ProductDetailsComponent implements OnInit {
     .subscribe(
       product =>  {
         this.product = product;
-        this.updateBreadcrumbs(product)
+        this.updateBreadcrumb(product)
        },
       error => console.log(error));
   }
 
 
-  updateBreadcrumbs(product: Product){
-     this.breadcrumbService.updateBreadcrumbs(product.id, product);
+  updateBreadcrumb(product:any): void {
+    this.breadcrumbService.update(product);
   }
-
 }

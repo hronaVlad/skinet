@@ -2,7 +2,7 @@
     <ol class="breadcrumb">
       <li class="breadcrumb-item active-item"  *ngFor="let breadcrumb of (breadcrumbs$ | async); let i = index; let first = first ;let last = last; "> 
         <a *ngIf="!last" [routerLink]="breadcrumb.url">{{ breadcrumb.label }}</a> 
-        <span *ngIf="last" class="last-item">{{ breadcrumb.label }}</span>
+        <span *ngIf="last" class="text-info">{{ breadcrumb.label }}</span>
       </li> 
     </ol>
 </nav>

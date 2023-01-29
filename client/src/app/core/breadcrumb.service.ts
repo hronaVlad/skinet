@@ -81,13 +81,13 @@ export class BreadcrumbService {
      return o;
    }
 
-   public updateBreadcrumbs(id: number, object: any) {
+   public update(object: any) {
       const values = this._breadcrumbs$.value;
 
       values.forEach(v => {
         if (v.meta && 
             v.meta.alias === 'ProductDetails' && 
-            v.meta.id == id && 
+            v.meta.id == object.id && 
             v.meta.function &&
             !v.label) {
               v.label = v.meta.function(object);

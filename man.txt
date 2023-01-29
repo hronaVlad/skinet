@@ -76,3 +76,9 @@ https://getbootstrap.com/docs/5.0/utilities/spacing/
 
 primeng
 https://www.primefaces.org/primeng-v14/breadcrumb
+
+https://www.primefaces.org/primeng-v15/menumodel
+
+
+change bootsrap theme ( install bootswatch and add a new css link to the angular.json file)
+https://bootswatch.com/lumen/

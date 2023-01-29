@@ -9,6 +9,7 @@ import { ErrorInterceptorInterceptor } from './error-interceptor.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { SectionHeaderComponent } from './section-header/section-header.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { LoadingInterceptor } from './loading.interceptor';
 
 @NgModule({
   declarations: [NavBarComponent, NotFoundComponent, ServerErrorComponent, SectionHeaderComponent, BreadcrumbComponent],
@@ -18,10 +19,12 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true
-    }),
+    })
   ],
   exports: [NavBarComponent, SectionHeaderComponent],
-  providers: [ {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorInterceptor, multi: true}
+  providers: [ 
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
   ]
 })
 export class CoreModule { }
