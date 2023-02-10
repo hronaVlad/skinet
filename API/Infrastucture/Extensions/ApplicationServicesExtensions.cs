@@ -11,6 +11,7 @@ namespace API.Infrastucture.Extensions
 
             //builder.Services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped(typeof(IBasketRepository), typeof(BasketRepository));
 
             services.Configure<ApiBehaviorOptions>(options => {
                 options.InvalidModelStateResponseFactory = actionContext =>
