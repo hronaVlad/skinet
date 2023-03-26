@@ -6,14 +6,15 @@ import { Type } from '../shared/models/types';
 import { Pagination } from '../shared/models/pagination';
 import { ProductFilterParams } from '../shared/models/productFilterParms';
 import { Product } from '../shared/models/product';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShopService {
-  url = 'https://localhost:7154/api/';
+  url = environment.apiUrl;
 
-  constructor(private client: HttpClient) { }
+  constructor(private readonly client: HttpClient) { }
 
   getProducts(filterParams: ProductFilterParams): Observable<Pagination> {
     let params = new HttpParams();
@@ -27,14 +28,14 @@ export class ShopService {
     }
 
     if (filterParams.search) {
-      params = params.set('search', filterParams.search);
+      params = params.set('Search', filterParams.search);
     }
 
     params = params.set('sort', filterParams.sort);
     params = params.set('pageIndex', filterParams.pageIndex);
     params = params.set('pageSize', filterParams.pageSize);
 
-    return this.client.get<Pagination>(this.url + 'products', { observe: 'body', params: params });
+    return this.client.get<Pagination>(this.url + 'products', { params});
   } 
 
   getTypes(): Observable<Type[]> {

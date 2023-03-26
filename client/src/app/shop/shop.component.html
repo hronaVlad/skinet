@@ -6,20 +6,20 @@
 
                 <h5 class="ms-3 text-info ml-3 mt-4 mb-3">Sort</h5>
 
-                <select class="form-select mb-3"  (change)="onSortSelected($event.target.value)">
+                <select class="form-select mb-3 cursor"  (change)="onSortSelected($event.target.value)">
                     <option *ngFor="let item of sortOptions" [value]="item.value">
                         {{item.name}}
                     </option>
                 </select>
     
                 <h5 class="ms-3 text-info ml-3 mt-4 mb-3">Brands</h5>
-                <ul class="list-group my-3">
+                <ul class="list-group my-3 cursor">
                     <li class="list-group-item" *ngFor="let item of brands" (click)="onBrandIdSelected(item.id)" [ngClass]="item.id === filterParams.brandId ? 'active' : ''">
                         {{item.name}}
                     </li>
                 </ul>
                 <h5 class="ms-3 text-info ml-3 mt-4 mb-3">Types</h5>
-                <ul class="list-group my-3">
+                <ul class="list-group my-3 cursor">
                     <li class="list-group-item" *ngFor="let item of types" (click)="onTypeIdSelected(item.id)" [ngClass]="item.id === filterParams.typeId ? 'active' : ''">
                         {{item.name}}
                     </li>
