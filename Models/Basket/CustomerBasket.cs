@@ -8,6 +8,7 @@
         public CustomerBasket(string id)
         {
             this.Id = id;
+            this.Items = new List<BasketItem>();
         }
     }
 }

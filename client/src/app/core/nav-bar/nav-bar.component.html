@@ -11,10 +11,10 @@
           <a class="me-3 py-2" routerLink="/test-error" routerLinkActive="active" >Errors</a>
         </nav>
 
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center" *ngIf="(basket$ | async) as basket">
             <a routerLink="/basket" style="margin-right: 30px" class="position-relative">
                 <i class="fa fa-shopping-cart fa-2x mr-1 text-dark"></i>
-                <div class="cart-no">5</div>
+                <div class="cart-no" *ngIf="basket.items.length" >{{basket.items.length}}</div>
             </a>
 
             <a href="#" class="btn btn-outline-secondary" style="margin-right: 10px;">Login</a>
