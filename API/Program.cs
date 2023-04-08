@@ -5,6 +5,8 @@ using API.Infrastucture.Extensions;
 using API.Mappers;
 using EFModels;
 using StackExchange.Redis;
+using Microsoft.AspNetCore.Identity;
+using EFModels.Entities.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<StoreContext>(_ => _.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<AppUserContext>(_ => _.UseSqlite(builder.Configuration.GetConnectionString("IdentityConnection")));
 builder.Services.AddSingleton<IConnectionMultiplexer>(_ =>
 {
     var connectionString = builder.Configuration.GetConnectionString("Redis");
@@ -25,7 +28,9 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(_ =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
-builder.Services.AddApplicationServices();
+builder.Services.AddServices();
+builder.Services.AddIdentityServices();
+builder.Services.AddAuth(builder.Configuration);
 builder.Services.AddCors(opt =>
             {
                 opt.AddPolicy("CorsPolicy", policy =>
@@ -44,8 +49,14 @@ using(var scope = app.Services.CreateAsyncScope()){
         var context = services.GetRequiredService<StoreContext>();
         await context.Database.MigrateAsync();
         await StoreContextSeed.SeedAsync(context, loggerFactory);
+
+        var identityContext = services.GetRequiredService<AppUserContext>();
+        var userManager = services.GetRequiredService<UserManager<AppUser>>();
+        await identityContext.Database.MigrateAsync();
+        await AppUserContextSeed.SeedAsync(userManager, loggerFactory);
     }
-    catch(Exception e) {
+    catch(Exception e) 
+    {
         var logger = loggerFactory.CreateLogger<Program>();
         logger.LogError(e, "An error occured during migration");
     }
@@ -67,6 +78,7 @@ app.UseStaticFiles();
 
 app.UseCors("CorsPolicy");
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

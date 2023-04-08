@@ -1,6 +1,8 @@
 using API.Helpers;
 using AutoMapper;
 using EFModels.Entities;
+using EFModels.Entities.Identity;
+using Models.Account;
 using Models.Product;
 
 namespace API.Mappers
@@ -13,6 +15,9 @@ namespace API.Mappers
             .ForMember(_ => _.ProductType, opt => opt.MapFrom(_ => _.ProductType.Name))
             .ForMember(_ => _.ProductBrand, opt => opt.MapFrom(_ => _.ProductBrand.Name))
             .ForMember(_ => _.PictureUrl, opt => opt.MapFrom<ProductUrlResolver>());
+
+            CreateMap<AppUser, UserDto>();
+            CreateMap<Address, AddressDto>().ReverseMap();
         }
     }
 }

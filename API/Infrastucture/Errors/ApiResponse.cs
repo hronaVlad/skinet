@@ -1,4 +1,4 @@
-namespace API.Infrastucture.Errors
+﻿namespace API.Infrastucture.Errors
 {
     public class ApiResponse
     {
