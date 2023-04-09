@@ -1,4 +1,3 @@
-using API.Infrastucture.Errors.Middlewares;
 using EFModels.Data;
 using Microsoft.EntityFrameworkCore;
 using API.Infrastucture.Extensions;
@@ -7,6 +6,8 @@ using EFModels;
 using StackExchange.Redis;
 using Microsoft.AspNetCore.Identity;
 using EFModels.Entities.Identity;
+using Microsoft.OpenApi.Models;
+using API.Infrastucture.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,9 +27,33 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(_ =>
     return multiplexer;
 });
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "Shop API", Version = "v2" });
+
+    var scheme = new OpenApiSecurityScheme
+    {
+        Description = "JWT Auth Scheme",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        Reference = new OpenApiReference
+        {
+            Type = ReferenceType.SecurityScheme,
+            Id = "Bearer"
+        }
+    };
+
+    options.AddSecurityDefinition("Bearer", scheme);
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        { scheme, new [] {"Bearer" } }
+    });
+});
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 builder.Services.AddServices();
+builder.Services.AddInvalidModelStateHandler();
 builder.Services.AddIdentityServices();
 builder.Services.AddAuth(builder.Configuration);
 builder.Services.AddCors(opt =>

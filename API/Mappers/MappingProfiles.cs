@@ -3,6 +3,8 @@ using AutoMapper;
 using EFModels.Entities;
 using EFModels.Entities.Identity;
 using Models.Account;
+using Models.Basket;
+using Models.Basket.Dto;
 using Models.Product;
 
 namespace API.Mappers
@@ -18,6 +20,9 @@ namespace API.Mappers
 
             CreateMap<AppUser, UserDto>();
             CreateMap<Address, AddressDto>().ReverseMap();
+
+            CreateMap<CustomerBasket, CustomerBasketDto>();
+            CreateMap<BasketItem, BasketItemDto>();
         }
     }
 }
