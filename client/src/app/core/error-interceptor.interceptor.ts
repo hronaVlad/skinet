@@ -12,12 +12,17 @@ import { ToastrService } from 'ngx-toastr';
 @Injectable()
 export class ErrorInterceptorInterceptor implements HttpInterceptor {
 
+  ignoreUrls: string[] = [
+    '/register'
+  ]
+
   constructor(private router: Router, private toast: ToastrService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe ( 
       catchError(error => {
-        if (error) {
+        
+        if (error && !this.ignoreUrls.find(_ => request.url.endsWith(_))) {
           if (error.status === 400) {
             this.router.navigateByUrl('/not-found');
           }
@@ -29,7 +34,10 @@ export class ErrorInterceptorInterceptor implements HttpInterceptor {
             this.router.navigateByUrl('/server-error', extras);
           }
         }
-        return throwError(error);
+
+        this.toast.error(error.error.message);
+
+        return throwError(error.error.message);
       })); 
   }
 }

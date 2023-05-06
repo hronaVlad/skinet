@@ -6,18 +6,24 @@ import { PaginationHeaderComponent } from './components/pagination-header/pagina
 import { PaginationBottomComponent } from './components/pagination-bottom/pagination-bottom.component'
 import { RouterModule } from '@angular/router';
 import { OrderTotalsComponent } from './components/order-totals/order-totals.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TextInputComponent } from './components/text-input/text-input.component';
 
 @NgModule({
   declarations: [
     PaginationHeaderComponent,
     PaginationBottomComponent,
     OrderTotalsComponent,
+    TextInputComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
     PaginationModule.forRoot(),
-    CarouselModule.forRoot()
+    CarouselModule.forRoot(),
+    ReactiveFormsModule,
+    BsDropdownModule.forRoot()
   ],
   exports: [
     RouterModule,
@@ -25,7 +31,10 @@ import { OrderTotalsComponent } from './components/order-totals/order-totals.com
     PaginationHeaderComponent,
     PaginationBottomComponent,
     CarouselModule,
-    OrderTotalsComponent
+    OrderTotalsComponent,
+    ReactiveFormsModule,
+    BsDropdownModule,
+    TextInputComponent
   ]
 })
 export class SharedModule { }

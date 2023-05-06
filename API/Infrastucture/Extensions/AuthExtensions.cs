@@ -22,6 +22,18 @@ namespace API.Infrastucture.Extensions
                         ValidIssuer = configuration["Token:Issuer"],
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Token:Key"]))
                     };
+
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnTokenValidated = async context =>
+                        {
+
+                        },
+                        OnAuthenticationFailed = async context =>
+                        {
+
+                        }
+                    };
                 });
 
             return services;

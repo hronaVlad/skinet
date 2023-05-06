@@ -18,7 +18,8 @@ namespace API.Mappers
             .ForMember(_ => _.ProductBrand, opt => opt.MapFrom(_ => _.ProductBrand.Name))
             .ForMember(_ => _.PictureUrl, opt => opt.MapFrom<ProductUrlResolver>());
 
-            CreateMap<AppUser, UserDto>();
+            CreateMap<AppUser, UserDto>()
+                .ForMember(_ => _.UserName, opt => opt.MapFrom(_ => _.DisplayName));
             CreateMap<Address, AddressDto>().ReverseMap();
 
             CreateMap<CustomerBasket, CustomerBasketDto>();

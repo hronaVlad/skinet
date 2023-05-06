@@ -1,0 +1,30 @@
+
+<div class="d-flex justify-content-center mt-5">
+    <div class="col-3">
+        <form class="form-group" [formGroup]="registerForm" (submit)="onSubmit()">
+
+        <!-- Name input -->
+        <app-text-input formControlName="userName" [label]="'Name'"></app-text-input>
+        <!-- Email input -->
+        <app-text-input formControlName="email" [label]="'Email address'"></app-text-input>
+        <!-- Password -->
+        <app-text-input formControlName="password" [label]="'Password'" [type]="'password'"></app-text-input>
+
+        <ul>
+          <li *ngFor="let e in registerForm.errors">
+            {{e}}
+          </li>
+        </ul>
+
+        <!-- Submit button -->
+        <button [disabled]="registerForm.invalid" type="submit" class="btn btn-primary btn-block mb-4" style="width: 100%;">Sign out</button>
+
+        <!-- Login button -->
+        <div class="text-center">
+          <p>Already a member? <a routerLink="/account/login">Login</a></p>
+        </div>
+        </form>
+    </div>
+</div>
+
+

@@ -17,8 +17,40 @@
                 <div class="cart-no" *ngIf="basket.items.length" >{{basket.items.length}}</div>
             </a>
 
-            <a href="#" class="btn btn-outline-secondary" style="margin-right: 10px;">Login</a>
-            <a href="#" class="btn btn-outline-secondary">Sign up</a>
+            <!-- no user -->
+            <ng-container  *ngIf="(user$ | async) === null">
+              <a routerLink="/account/login" class="btn btn-outline-secondary" style="margin-right: 10px;">Login</a>
+              <!-- <a routerLink="/account/register" class="btn btn-outline-secondary">Sign up</a> -->
+            </ng-container>
+
+            <!-- user -->
+            <ng-container *ngIf="user$ | async">
+              <div dropdown class="dropdown ms-3 me-5">
+                <a dropdownToggle class="dropdown-toggle" style="cursor: pointer;">
+                  Welcome  <b>{{(user$ | async).userName}}</b>
+                </a>
+                <div *dropdownMenu class="dropdown-menu dropdown-menu-right" style="cursor: pointer;">
+                    <a class="dropdown-item align-items-center py-2" routerLink="/basket">
+                      <i class="fa fa-shopping-cart ms-2"></i> 
+                      <span class="ms-3">View Basket</span>
+                    </a>
+
+                    <a class="dropdown-item d-flex align-items-center py-2" routerLink="/orders">
+                      <i class="fa fa-history ms-2"></i>
+                      <span class="ms-3">View Orders</span>
+                    </a>
+                  
+                  <div class="divider dropdown-divider"></div>
+
+                  <a class="dropdown-item align-items-center py-2" (click)="logout()">
+                    <i class="fa fa-sign-out ms-2"></i>
+                    <span class="ms-3">Logout</span>
+                  </a>
+                  
+                </div>
+              </div>
+
+            </ng-container>
         </div>
 
       </div>

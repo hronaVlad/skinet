@@ -1,0 +1,35 @@
+<div class="form-outline mb-4">
+    <label class="form-label" for="{{label}}">{{label}}</label>
+
+    <div class="loader-container">
+        <input
+          class="form-control"
+          [type]="type"
+          id="{{label}}"
+          placeholder="{{label}}"
+          #input
+          (input)="onChange($event.target.value)"
+          (blur)="onTouched()"
+          [ngClass]="(controlDirective &&
+                      controlDirective.control &&
+                      controlDirective.control.invalid &&
+                      controlDirective.control.touched) ? 'is-invalid' : (controlDirective &&
+                      controlDirective.control &&
+                      !controlDirective.control.touched)  ? null :
+                      (controlDirective &&
+                      controlDirective.control &&
+                      controlDirective.control.touched && controlDirective.control.status === 'PENDING')  ? null :
+                      'is-valid'"
+          />
+          <span *ngIf="controlDirective && controlDirective.control && controlDirective.control.status === 'PENDING'"
+            class="fa fa-spinner fa-spin loader">
+          </span>
+
+        <div class="invalid-feedback" *ngIf="controlDirective && controlDirective.control && controlDirective.control.invalid && controlDirective.control.touched">
+            <span  class="text-danger" *ngIf="controlDirective.control.errors?.required"> {{label}} is required</span>
+            <span  class="text-danger" *ngIf="controlDirective.control.errors?.pattern"> {{label}} is invalid</span>
+            <span  class="text-danger" *ngIf="controlDirective.control.errors?.emailInUse"> Email address is in use </span>
+        </div>
+    </div>
+
+</div>

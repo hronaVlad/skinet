@@ -10,6 +10,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { SectionHeaderComponent } from './section-header/section-header.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { LoadingInterceptor } from './loading.interceptor';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [NavBarComponent, NotFoundComponent, ServerErrorComponent, SectionHeaderComponent, BreadcrumbComponent],
@@ -19,7 +20,8 @@ import { LoadingInterceptor } from './loading.interceptor';
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true
-    })
+    }),
+    SharedModule
   ],
   exports: [NavBarComponent, SectionHeaderComponent],
   providers: [ 
