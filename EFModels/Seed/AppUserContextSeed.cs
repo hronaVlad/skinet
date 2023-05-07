@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
-namespace EFModels.Data
+namespace EFModels.Seed
 {
     public class AppUserContextSeed
     {
@@ -36,7 +36,7 @@ namespace EFModels.Data
                     }
                 }
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 logger.LogError(e, "An error occured during data seed");
                 throw;

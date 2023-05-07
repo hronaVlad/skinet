@@ -1,4 +1,4 @@
-﻿using P = EFModels.Entities.Product;
+﻿using P = EFModels.Entities.Product.Product;
 
 namespace Core.Specifications.Product
 {

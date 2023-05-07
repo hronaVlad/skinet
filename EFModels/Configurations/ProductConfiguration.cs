@@ -1,7 +1,7 @@
-using EFModels.Entities;
+using EFModels.Entities.Product;
 using Microsoft.EntityFrameworkCore;
 
-namespace EFModels.Config
+namespace EFModels.Configurations
 {
     public class ProductConfiguration : IEntityTypeConfiguration<Product>
     {

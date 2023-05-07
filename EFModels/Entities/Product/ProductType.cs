@@ -1,4 +1,4 @@
-namespace EFModels.Entities
+namespace EFModels.Entities.Product
 {
     public class ProductType : EntityKey
     {

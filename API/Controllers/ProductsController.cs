@@ -1,9 +1,9 @@
-using API.Helpers;
 using API.Infrastucture.Errors;
 using AutoMapper;
+using Common.Helpers;
 using Core.Repositories.Contracts;
 using Core.Specifications.Product;
-using EFModels.Entities;
+using EFModels.Entities.Product;
 using Microsoft.AspNetCore.Mvc;
 using Models.Product;
 

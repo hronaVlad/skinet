@@ -5,9 +5,13 @@ EF  - install microsoft.entityframeworkcore.design, Microsoft.EntityFrameworkCor
 
 Package Manager Console. Defeault project: EFModels
 	Add-Migration InitialCreate2
+	
+PM> Add-Migration OrderAdded -Context StoreContext
 
 --migrations via console from root
-	PS D:\console\skinet> dotnet ef migrations add IdentityInit -p .\EFModels\ -s .\API\ -c EFModels.AppUserContext -o IdentityMigrations
+PS D:\console\skinet> 
+dotnet ef migrations add IdentityInit -p .\EFModels\ -s .\API\ -c EFModels.AppUserContext -o IdentityMigrations
+dotnet ef migrations add OrderEntityAdded -p .\EFModels\ -s .\API\ -c EFModels.StoreContext -o Migrations
 
 update-database
 

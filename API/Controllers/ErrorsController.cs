@@ -1,5 +1,4 @@
 using API.Infrastucture.Errors;
-using EFModels.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers

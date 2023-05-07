@@ -1,4 +1,3 @@
-using EFModels.Data;
 using Microsoft.EntityFrameworkCore;
 using API.Infrastucture.Extensions;
 using API.Mappers;
@@ -8,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using EFModels.Entities.Identity;
 using Microsoft.OpenApi.Models;
 using API.Infrastucture.Middlewares;
+using EFModels.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
 

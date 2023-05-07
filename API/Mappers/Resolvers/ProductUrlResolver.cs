@@ -1,8 +1,8 @@
 using AutoMapper;
-using EFModels.Entities;
+using EFModels.Entities.Product;
 using Models.Product;
 
-namespace API.Helpers
+namespace API.Mappers.Resolvers
 {
     public class ProductUrlResolver : IValueResolver<Product, ProductToReturnDto, string>
     {
@@ -10,15 +10,16 @@ namespace API.Helpers
 
         public ProductUrlResolver(IConfiguration configuration)
         {
-            this._configuration = configuration;
+            _configuration = configuration;
         }
 
         public string Resolve(Product source, ProductToReturnDto destination, string destMember, ResolutionContext context)
         {
-            string apiUrl =  _configuration["ApiUrl"];
+            string apiUrl = _configuration["ApiUrl"];
             string result = null;
 
-            if (!string.IsNullOrEmpty(source.PictureUrl)) {
+            if (!string.IsNullOrEmpty(source.PictureUrl))
+            {
                 result = $"{apiUrl}/{source.PictureUrl}";
             }
 

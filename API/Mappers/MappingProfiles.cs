@@ -1,7 +1,7 @@
-using API.Helpers;
+using API.Mappers.Resolvers;
 using AutoMapper;
-using EFModels.Entities;
 using EFModels.Entities.Identity;
+using EFModels.Entities.Product;
 using Models.Account;
 using Models.Basket;
 using Models.Basket.Dto;
