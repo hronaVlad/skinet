@@ -1,9 +1,8 @@
-using API.Infrastucture.Errors;
+using API.Services;
 using Core.Repositories;
 using Core.Repositories.Contracts;
 using Core.Services;
 using Core.Services.Contracts;
-using Microsoft.AspNetCore.Mvc;
 
 namespace API.Infrastucture.Extensions
 {
@@ -14,6 +13,8 @@ namespace API.Infrastucture.Extensions
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IBasketRepository,BasketRepository>();
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
             return services;

@@ -1,6 +1,5 @@
 ﻿using Core.Repositories.Contracts;
 using Core.Specifications;
-using Core.Specifications.Product;
 using EFModels;
 using EFModels.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -16,17 +15,19 @@ namespace Core.Repositories
             _context = context;
         }
 
-        public async Task<T> GetById(int id) =>
+        public async Task<T> GetByIdAsync(int id) =>
             await _context.Set<T>().FindAsync(id);
             
-        public async Task<T> GetWithSpec(ISpecification<T> spec) =>
+        public async Task<T> GetWithSpecAsync(ISpecification<T> spec) =>
             await ApplySpecification(spec).FirstOrDefaultAsync();
 
-        public async Task<IReadOnlyList<T>> GetAll() =>
+
+        public async Task<IReadOnlyList<T>> GetAllAsync() =>
             await _context.Set<T>().ToListAsync();
 
-        public async Task<IReadOnlyList<T>> GetAll(ISpecification<T> spec) =>
+        public async Task<IReadOnlyList<T>> GetAllAsync(ISpecification<T> spec) =>
             await ApplySpecification(spec).ToListAsync();
+
 
         public async Task<int> CountAsync(ISpecification<T> spec) =>
             await ApplySpecification(spec).CountAsync();
@@ -34,5 +35,21 @@ namespace Core.Repositories
 
         private IQueryable<T> ApplySpecification(ISpecification<T> spec) =>
             SpecificationEvalutor<T>.GetQuery(_context.Set<T>().AsQueryable(), spec);
+
+        public void Delete(T entity)
+        {
+            _context.Set<T>().Remove(entity);
+        }
+
+        public void Add(T entity)
+        {
+            _context.Set<T>().Add(entity);
+        }
+
+        public void Update(T entity)
+        {
+            _context.Set<T>().Attach(entity);
+            _context.Entry(entity).State = EntityState.Modified;
+        }
     }
 }

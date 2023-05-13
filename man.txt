@@ -13,6 +13,8 @@ PS D:\console\skinet>
 dotnet ef migrations add IdentityInit -p .\EFModels\ -s .\API\ -c EFModels.AppUserContext -o IdentityMigrations
 dotnet ef migrations add OrderEntityAdded -p .\EFModels\ -s .\API\ -c EFModels.StoreContext -o Migrations
 
+dotnet ef database drop -p .\EFModels\ -s .\API\ -c EFModels.StoreContext
+
 update-database
 
 

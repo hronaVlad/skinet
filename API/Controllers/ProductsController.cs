@@ -35,7 +35,7 @@ public class ProductsController : BaseApiController
         var spec = new ProductWithTypesAndBrandsSpecification(productParams);
         var countSpec = new ProductWithFiltersForCountSpecification(productParams);
 
-        var products = await _productRepository.GetAll(spec);
+        var products = await _productRepository.GetAllAsync(spec);
         var totalItems = await _productRepository.CountAsync(countSpec);
 
         var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products);
@@ -51,7 +51,7 @@ public class ProductsController : BaseApiController
     {
         var spec = new ProductWithTypesAndBrandsSpecification(id);
 
-        var product = await _productRepository.GetWithSpec(spec);
+        var product = await _productRepository.GetWithSpecAsync(spec);
 
         if (product == null) return NotFound(new ApiResponse(404));
 
@@ -61,9 +61,9 @@ public class ProductsController : BaseApiController
 
     [HttpGet("brands")]
     public async Task<ActionResult<List<Product>>> GetProductBrands() =>
-        Ok(await _productBrandRepository.GetAll());
+        Ok(await _productBrandRepository.GetAllAsync());
 
     [HttpGet("types")]
     public async Task<ActionResult<List<Product>>> GetProductTypes() =>
-        Ok(await _productTypeRepository.GetAll());
+        Ok(await _productTypeRepository.GetAllAsync());
 }

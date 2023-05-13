@@ -1,6 +1,6 @@
 ﻿namespace EFModels.Entities.Order
 {
-    public class Address : EntityKey
+    public class Address
     {
         public Address()
         {

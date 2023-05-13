@@ -5,7 +5,7 @@ using System.Security.Claims;
 
 namespace API.Infrastucture.Extensions
 {
-    public static class UseExtensions
+    public static class UserExtensions
     {
         public static async Task<AppUser> GetWithAddress(this ClaimsPrincipal principal, UserManager<AppUser> userManager)
         {
@@ -20,5 +20,8 @@ namespace API.Infrastucture.Extensions
 
             return await userManager.FindByEmailAsync(email);
         }
+
+        public static string GetEmail(this ClaimsPrincipal principal) =>
+            principal.FindFirstValue(ClaimTypes.Email);
     }
 }

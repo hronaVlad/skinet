@@ -8,6 +8,8 @@ using EFModels.Entities.Identity;
 using Microsoft.OpenApi.Models;
 using API.Infrastucture.Middlewares;
 using EFModels.Seed;
+using Microsoft.Extensions.Configuration;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,7 +53,7 @@ builder.Services.AddSwaggerGen(options =>
         { scheme, new [] {"Bearer" } }
     });
 });
-builder.Services.AddAutoMapper(typeof(MappingProfiles));
+builder.Services.AddMapper();
 builder.Services.AddServices();
 builder.Services.AddInvalidModelStateHandler();
 builder.Services.AddIdentityServices();
