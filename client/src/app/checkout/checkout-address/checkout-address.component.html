@@ -1,0 +1,50 @@
+<div class="mt-4" [formGroup]="checkoutForm">
+
+  <div class="d-flex justify-content-between">
+    <h4>Shipping addresss</h4>
+    <button class="btn btn-outline-success"
+    (click)="saveAsDefault()"
+    [disabled]="!(checkoutForm.get('addressForm')).valid || !(checkoutForm.get('addressForm')).dirty"
+    >Save as default address</button>
+  </div>
+
+  <div class="row" formGroupName="addressForm">
+    <div class="form-group col-6">
+      <app-text-input formControlName="firstName" [label]="'First name'"></app-text-input>
+    </div>
+
+    <div class="form-group col-6">
+    <app-text-input formControlName="lastName" [label]="'Last name'"></app-text-input>
+    </div>
+
+    <div class="form-group col-6">
+    <app-text-input formControlName="city" [label]="'City'"></app-text-input>
+    </div>
+
+    <div class="form-group col-6">
+      <app-text-input formControlName="state" [label]="'State'"></app-text-input>
+    </div>
+
+    <div class="form-group col-6">
+    <app-text-input formControlName="street" [label]="'Street'"></app-text-input>
+    </div>
+
+    <div class="form-group col-6">
+    <app-text-input formControlName="postalCode" [label]="'Postal code'"></app-text-input>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="d-flex justify-content-between">
+  <button class="btn btn-outline-primary" routerLink="/basket">
+    <i class="fa fa-angle-left"></i>
+    Go to Basket
+  </button>
+
+  <button class="btn btn-primary" cdkStepperNext [disabled]="!(checkoutForm.get('addressForm')).valid">
+    Go to Delivery
+    <i class="fa fa-angle-right"></i>
+  </button>
+</div>

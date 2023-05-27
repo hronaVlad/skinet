@@ -19,12 +19,15 @@ namespace EFModels.Seed
                     {
                         DisplayName = "admin",
                         Email = "admin@admin.com",
-                        UserName = "admin",
+                        UserName = "admin@admin.com",
                         Address = new Address
                         {
                             FirstName = "admin",
                             LastName = "admin",
-                            City = "Priluky"
+                            City = "New York",
+                            State = "NY",
+                            Street = "10 The Updated Street",
+                            PostalCode = "90250"
                         }
                     };
 

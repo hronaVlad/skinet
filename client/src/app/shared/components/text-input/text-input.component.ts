@@ -12,7 +12,7 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
   @Input() type = 'text';
   @ViewChild('input', {static: true}) input: ElementRef;
 
-  constructor(@Self() public controlDirective: NgControl) { 
+  constructor(@Self() public controlDirective: NgControl) {
     this.controlDirective.valueAccessor = this;
   }
 

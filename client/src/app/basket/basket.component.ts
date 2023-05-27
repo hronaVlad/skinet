@@ -15,7 +15,7 @@ export class BasketComponent implements OnInit {
   constructor(private basketService: BasketService) { }
 
   ngOnInit(): void {
-    this.basket$ = this.basketService.basket$;    
+    this.basket$ = this.basketService.basket$;
   }
 
   increaseQuantity(item: IBasketItem): void {
@@ -24,5 +24,9 @@ export class BasketComponent implements OnInit {
 
   decreaseQuantity(item: IBasketItem): void {
     this.basketService.decreaseItem(item);
+  }
+
+  remove(item: IBasketItem) {
+    this.basketService.removeItem(item);
   }
 }

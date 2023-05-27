@@ -1,0 +1,52 @@
+<div class="row mt-2" *ngIf="(basket$ | async) as basket">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col" colspan="2">Product</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Total</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of basket.items; let i = index">
+        <td>
+            <img [src]="item.pictureUrl" [alt]="productName"  class="img-fluid" style="max-width: 150px" />
+        </td>
+        <td>
+            <div>
+              <h5><a class="text-dark" routerLink="/shop/{{item.id}}">{{item.productName}}</a></h5>
+              <p>
+                <span class="text-muted">Brand: </span>{{item.brand}}
+                <span class="text-muted">Type: </span>{{item.type}}
+              </p>
+            </div>
+        </td>
+        <td>{{item.price | currency}}</td>
+        <td>
+            <div class="d-flex"> <!-- Quantity -->
+
+              <button class="btn btn-link px-2" (click)="decreaseQuantity(item)" *ngIf="isBasket">
+                <i class="fa fa-minus"></i>
+              </button>
+
+              <input #qty min="1" name="quantity"
+                    style="width: 70px;" [value]="item.quantity"
+                    readonly
+                    class="form-control form-control-sm" />
+
+              <button class="btn btn-link px-2" (click)="increaseQuantity(item)" *ngIf="isBasket">
+                <i class="fa fa-plus"></i>
+              </button>
+
+            </div>
+        </td>
+        <td><h5>{{item.price * item.quantity | currency}}</h5></td>
+        <td *ngIf="isBasket">
+            <a style="cursor:pointer" class="float-end text-black" (click)="removeItem(item)"><i class="fa fa-times"></i></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

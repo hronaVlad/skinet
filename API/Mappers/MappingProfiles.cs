@@ -19,7 +19,7 @@ namespace API.Mappers
             CreateMap<Product, ProductToReturnDto>()
             .ForMember(_ => _.ProductType, opt => opt.MapFrom(_ => _.ProductType.Name))
             .ForMember(_ => _.ProductBrand, opt => opt.MapFrom(_ => _.ProductBrand.Name))
-            .ForMember(_ => _.PictureUrl, opt => opt.MapFrom<ProductUrlResolver>());
+            .ForMember(_ => _.PictureUrl,opt => opt.MapFrom(_ => _.PictureUrl.GetAbsoluteUrl(configuration)));
 
             CreateMap<Product, ProductItemOrdered>()
             .ForMember(_ => _.ProductId, opt => opt.MapFrom(_ => _.Id))

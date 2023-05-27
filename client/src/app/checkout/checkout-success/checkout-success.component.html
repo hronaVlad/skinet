@@ -1,0 +1,12 @@
+<div class="container mt-5">
+  <div class="row align-items-center">
+    <div class="col-auto">
+      <i class="fa fa-check-circle fa-5x" style="color:green"></i>
+    </div>
+    <div class="col">
+      <h2>Thank you. Your order is confirmed</h2>
+    </div>
+  </div>
+  <p *ngIf="order"> {{order | json}} </p>
+  <button class="btn btn-outline-success mt-3" (click)="navigateToOrder()">View your order</button>
+</div>

@@ -25,7 +25,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<Order>>> GetForUser()
+        public async Task<ActionResult<IReadOnlyList<OrderDto>>> GetForUser()
         {
             var email = User.GetEmail();
 
@@ -35,7 +35,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{orderId}")]
-        public async Task<ActionResult<IReadOnlyList<Order>>> Get(int orderId)
+        public async Task<ActionResult<OrderDto>> Get(int orderId)
         {
             var email = User.GetEmail();
 
@@ -47,7 +47,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<OrderDto>> Create([FromBody] OrderRequestDto requestDto)
+        public async Task<ActionResult<Order>> Create([FromBody] OrderRequestDto requestDto)
         {
             var email = User.GetEmail();
             var basket = await _basketRepository.GetAsync(requestDto.basketId);
@@ -60,7 +60,7 @@ namespace API.Controllers
             if (order == null) 
                 return BadRequest(new ApiResponse(400, "Failed to create an order"));
 
-            return Ok(order);
+            return Ok(_mapper.Map<OrderDto>(order));
         }
 
         [HttpGet("deliveryMethods")]

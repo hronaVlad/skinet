@@ -14,17 +14,22 @@ export class BasketService extends BasketApiService {
 
   private basketTotalsSource = new BehaviorSubject<IBasketTotals>(null);
   basketTotals$ = this.basketTotalsSource.asObservable();
-  
+  shipping = 0;
+
     constructor(client: HttpClient) {
       super(client);
     }
 
     public init(): void {
-      this.get(this.getBasketId())
+      this.get(this.getOrCreateBasketId())
       .subscribe(_ => {
         this.calculateTotals();
         console.log('Basket initialized');
       });
+    }
+
+    public getBasketId(): string {
+      return this.getValue().id;
     }
 
     public addItem(product: Product, quantity: number = 1 ): void {
@@ -73,16 +78,33 @@ export class BasketService extends BasketApiService {
       }
     }
 
-    private mapProductToBasketItem(product: Product, quantity: number): IBasketItem{
-      return {
-        id: product.id,
-        productName: product.name,
-        pictureUrl: product.pictureUrl,
-        price: product.price,
-        quantity: quantity,
-        brand: product.productBrand,
-        type: product.productType
-      };
+    public setShipping(shippingCost: number) : void {
+      this.shipping = shippingCost;
+      this.calculateTotals();
+    }
+
+    public clearBasket(): void {
+      this.basketSource.next(null);
+      this.basketTotalsSource.next(null);
+      localStorage.removeItem(this.localStorage_basket_name);
+
+      this.init();
+    }
+
+    public deleteBasket(): void {
+      const basket = this.getValue();
+
+      if (basket) {
+        this.delete(basket.id).subscribe( {
+            next: () => {
+              this.clearBasket();
+            },
+            error: error => {
+              console.log(error);
+              throw error;
+            }
+        });
+      }
     }
 
     private saveBasket() {
@@ -97,15 +119,27 @@ export class BasketService extends BasketApiService {
       this.calculateTotals();
     }
 
-    private getBasketId(): string {
+    private getOrCreateBasketId(): string {
       return localStorage.getItem(this.localStorage_basket_name) ?? uuidv4();
     }
 
     private calculateTotals(): void {
       const basket = this.getValue();
-      const shipping = 0;
+      const shipping = this.shipping;
       const subtotal = basket.items.reduce( (val, cur) => (cur.price * cur.quantity) + val, 0);
       const total = shipping + subtotal;
       this.basketTotalsSource.next({shipping, subtotal, total});
+    }
+
+    private mapProductToBasketItem(product: Product, quantity: number): IBasketItem{
+      return {
+        id: product.id,
+        productName: product.name,
+        pictureUrl: product.pictureUrl,
+        price: product.price,
+        quantity: quantity,
+        brand: product.productBrand,
+        type: product.productType
+      };
     }
 }

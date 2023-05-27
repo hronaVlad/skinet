@@ -16,7 +16,8 @@ namespace API.Mappers.Resolvers
 
         public string Resolve(Product source, ProductToReturnDto destination, string destMember, ResolutionContext context)
         {
-            return source.PictureUrl.GetAbsoluteUrl(_configuration);
+            // return source.PictureUrl.GetAbsoluteUrl(_configuration);
+            return "";
         }
     }
 }

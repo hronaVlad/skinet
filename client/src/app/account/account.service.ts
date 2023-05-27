@@ -39,13 +39,8 @@ export class AccountService {
     return this.client.get<IAddress>(this.url + 'address');
   }
 
-  public updateAddress(address: IAddress): void {
-    this.client.put<IAddress>(this.url + 'address', address)
-      .subscribe(_ => {
-
-      }, error => {
-        console.log(error);
-    });
+  public updateAddress(address: IAddress) {
+    return this.client.put<IAddress>(this.url + 'address', address);
   }
 
 
@@ -68,10 +63,10 @@ export class AccountService {
         return of(null);
       }
 
-      let headers = new HttpHeaders();
-      headers = headers.set('Authorization', `Bearer ${token}`);
+      // let headers = new HttpHeaders();
+      // headers = headers.set('Authorization', `Bearer ${token}`);
 
-      return this.client.get<IUser>(this.url, { headers }).subscribe (user => {
+      return this.client.get<IUser>(this.url, /*{ headers }*/).subscribe (user => {
         this.setTokenInLocalStorage(user.token);
         this.userSource.next(user);
       }, error => {
@@ -79,12 +74,12 @@ export class AccountService {
       });
     }
 
-  private setTokenInLocalStorage(token: string): void {
-    localStorage.setItem(this.localstorageTokenItem, token);
+  public getTokenFromLocalStorage(): string {
+    return localStorage.getItem(this.localstorageTokenItem);
   }
 
-  private getTokenFromLocalStorage(): string {
-    return localStorage.getItem(this.localstorageTokenItem);
+  private setTokenInLocalStorage(token: string): void {
+    localStorage.setItem(this.localstorageTokenItem, token);
   }
 
 }
