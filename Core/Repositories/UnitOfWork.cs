@@ -15,7 +15,7 @@ namespace Core.Repositories
             _context = context;
         }
 
-        public async Task<int> Complete() =>
+        public async Task<int> CompleteAsync() =>
             await _context.SaveChangesAsync();
 
         public void Dispose()

@@ -14,7 +14,7 @@ namespace Models.Order
 
         public List<OrderItemDto> Items { get; set; }
         public string PaymentIntentId { get; set; }
-
+        public string PaymentClientSecret { get; set; }
         public decimal ShippingPrice { get; set; }
         public decimal SubTotal { get; set; }
         public decimal Total { get; set; }

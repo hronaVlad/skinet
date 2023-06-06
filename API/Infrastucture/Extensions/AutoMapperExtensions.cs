@@ -7,7 +7,6 @@ namespace API.Infrastucture.Extensions
     {
         public static void AddMapper(this IServiceCollection services)
         {
-            //builder.Services.AddAutoMapper(typeof(MappingProfiles));
             var configuration = services.BuildServiceProvider().GetService<IConfiguration>();
 
             services.AddAutoMapper(cfg => {

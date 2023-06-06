@@ -14,7 +14,9 @@ dotnet ef migrations add IdentityInit -p .\EFModels\ -s .\API\ -c EFModels.AppUs
 dotnet ef migrations add OrderEntityAdded -p .\EFModels\ -s .\API\ -c EFModels.StoreContext -o Migrations
 dotnet ef database drop -p .\EFModels\ -s .\API\ -c EFModels.StoreContext
 
-update-database
+---update-database
+ dotnet ef database update --project .\EFModels\ -c EFModels.StoreContext
+
 
 
 			#how to work with db in visual code:
@@ -92,3 +94,7 @@ https://v14.material.angular.io/cdk/stepper/examples
 
 change bootsrap theme ( install bootswatch and add a new css link to the angular.json file)
 https://bootswatch.com/lumen/
+
+
+Stripe
+https://dashboard.stripe.com/test/payments

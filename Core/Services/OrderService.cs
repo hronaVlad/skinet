@@ -46,7 +46,7 @@ namespace API.Services
 
             _unitOfWork.GetRepository<Order>().Add(order);
 
-            var result = await _unitOfWork.Complete();
+            var result = await _unitOfWork.CompleteAsync();
 
             if (result <= 0) return null;
 

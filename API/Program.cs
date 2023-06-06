@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using API.Infrastucture.Extensions;
-using API.Mappers;
 using EFModels;
 using StackExchange.Redis;
 using Microsoft.AspNetCore.Identity;
@@ -8,8 +7,6 @@ using EFModels.Entities.Identity;
 using Microsoft.OpenApi.Models;
 using API.Infrastucture.Middlewares;
 using EFModels.Seed;
-using Microsoft.Extensions.Configuration;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -65,6 +62,7 @@ builder.Services.AddCors(opt =>
                     policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
                 });
             });
+builder.Services.AddStripeKey();
 
 var app = builder.Build();
 

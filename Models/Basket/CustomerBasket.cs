@@ -10,5 +10,8 @@
             this.Id = id;
             this.Items = new List<BasketItem>();
         }
+
+        public int DeliveryMethodId { get; set; }
+        public string PaymentIntent { get; set; }
     }
 }
