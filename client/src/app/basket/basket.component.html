@@ -7,12 +7,14 @@
   <div *ngIf="(basket$ | async) as basket">
     <div class="container">
 
-      <app-basket-summary [isBasket]="true"
+      <app-basket-summary
+        [items]="basket.items"
+        [isBasket]="true"
         (increase)="increaseQuantity($event)"
         (decrease)="decreaseQuantity($event)"
         (remove)="remove($event)" ></app-basket-summary>
 
-      <div class="row">
+      <div class="row" *ngIf="basket.items && basket.items.length > 0">
         <div class="col-6 offset-6">
           <order-totals></order-totals>
           <a routerLink="/checkout" class="btn btn-outline-secondary btn-block" style="width: 100%;">Proceed to checkout</a>

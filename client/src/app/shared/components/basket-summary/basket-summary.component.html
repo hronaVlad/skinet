@@ -1,4 +1,4 @@
-<div class="row mt-2" *ngIf="(basket$ | async) as basket">
+<div class="row mt-2" *ngIf="items">
   <table class="table">
     <thead class="thead-dark">
       <tr>
@@ -10,13 +10,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of basket.items; let i = index">
+      <tr *ngFor="let item of items; let i = index">
         <td>
             <img [src]="item.pictureUrl" [alt]="productName"  class="img-fluid" style="max-width: 150px" />
         </td>
         <td>
             <div>
-              <h5><a class="text-dark" routerLink="/shop/{{item.id}}">{{item.productName}}</a></h5>
+              <h5><a class="text-dark" routerLink="/shop/{{item.id || item.productId}}">{{item.productName}}</a></h5>
               <p>
                 <span class="text-muted">Brand: </span>{{item.brand}}
                 <span class="text-muted">Type: </span>{{item.type}}

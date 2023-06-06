@@ -1,4 +1,7 @@
-<app-basket-summary></app-basket-summary>
+
+<ng-container *ngIf="(basket$ | async) as basket">
+  <app-basket-summary [items]="basket.items"></app-basket-summary>
+</ng-container>
 
 <div class="d-flex justify-content-between mt-5">
   <button class="btn btn-outline-primary" cdkStepperPrevious>

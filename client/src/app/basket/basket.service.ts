@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IBasketItem, IBasketTotals } from '../shared/models/basket';
+import { IBasketItem, IOrderTotals } from '../shared/models/basket';
 import { Product } from '../shared/models/product';
 import { BasketApiService } from './basket-api.service';
 import { v4 as uuidv4 } from 'uuid';
@@ -12,7 +12,7 @@ import { BehaviorSubject } from 'rxjs';
 export class BasketService extends BasketApiService {
   localStorage_basket_name = "basket_id";
 
-  private basketTotalsSource = new BehaviorSubject<IBasketTotals>(null);
+  private basketTotalsSource = new BehaviorSubject<IOrderTotals>(null);
   basketTotals$ = this.basketTotalsSource.asObservable();
   shipping = 0;
 
