@@ -4,7 +4,7 @@
       <button
         (click)="onClick(i)"
         [class.active]="selectedIndex === i"
-        class="nav-link py-2 text-uppercase font-weight-bold btn-block">{{step.label}} {{step.completed}}</button>
+        class="nav-link py-2 text-uppercase font-weight-bold btn-block">{{step.label}}</button> <!--{{step.completed}}-->
     </li>
   </ul>
   <ng-container [ngTemplateOutlet]="selected.content"></ng-container>

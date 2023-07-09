@@ -9,10 +9,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Models.Order;
+using Models.Payment;
 
 namespace API.Controllers
 {
-    [Authorize]
+    // [Authorize]
     public class PaymentsController : BaseApiController
     {
         private readonly IPaymentService _paymentService;
@@ -28,35 +29,43 @@ namespace API.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost("{orderId}")]
-        public async Task<ActionResult<OrderDto>> CreateIntent(int orderId)
+        [HttpPost]
+        public async Task<ActionResult<OrderDto>> CreateIntent(IntentRequestModel model)
         {
-            var email = User.GetEmail();
-            var order = await _orderService.GetByIdAsync(orderId, email);
 
-            if (order == null) 
-                return NotFound(new ApiResponse(404));
+            if (model == null)
+                return BadRequest();
 
-            var intentId = order.PaymentIntentId;
-            var total = (long)order.GetTotal();
+            // var email = User.GetEmail();
+            // var order = await _orderService.GetByIdAsync(orderId, email);
 
-            if (intentId.IsNullOrEmpty())
+            // if (order == null) 
+            //     return NotFound(new ApiResponse(404));
+
+            // var intentId = order.PaymentIntentId;
+            // var total = (long)order.GetTotal();
+
+            StripeIntentResponse response = null;
+
+            if (model.IntentId.IsNullOrEmpty())
             {
-                var response = await _paymentService.CreateIntentAsync(total);
+                response = await _paymentService.CreateIntentAsync(model.Total);
 
-                order.PaymentIntentId = response.IntentId;
-                order.PaymentClientSecret = response.ClientSecret;
+            //     order.PaymentIntentId = response.IntentId;
+            //     order.PaymentClientSecret = response.ClientSecret;
 
-                _unitOfWork.GetRepository<Order>().Update(order);
+            //     _unitOfWork.GetRepository<Order>().Update(order);
 
-                await _unitOfWork.CompleteAsync();
+            //     await _unitOfWork.CompleteAsync();
             }
             else
             {
-                await _paymentService.UpdateIntentAsync(intentId, total);
+                response = await _paymentService.UpdateIntentAsync(model.IntentId, model.Total);
             }
 
-            return Ok(_mapper.Map<OrderDto>(order));
+            // return Ok(_mapper.Map<OrderDto>(order));
+
+            return Ok(response);
         }
     }
 }

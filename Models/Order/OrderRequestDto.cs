@@ -9,5 +9,6 @@ namespace Models.Order
         public string basketId { get; set; }  
         public int DeliveryMethodId { get; set; }
         public AddressDto ShipToAddress { get; set; }
+        public string PaymentIntentId {get; set;}
     }
 }

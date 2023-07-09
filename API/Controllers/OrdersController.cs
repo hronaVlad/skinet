@@ -55,7 +55,7 @@ namespace API.Controllers
             if (basket?.Items?.Any() == null) 
                 return BadRequest(new ApiResponse(400, "No items in the basket"));
 
-            var order = await _orderService.CreateOrderAsync(email, basket, requestDto.DeliveryMethodId, requestDto.ShipToAddress);
+            var order = await _orderService.CreateOrderAsync(email, basket, requestDto.DeliveryMethodId, requestDto.ShipToAddress, requestDto.PaymentIntentId);
 
             if (order == null) 
                 return BadRequest(new ApiResponse(400, "Failed to create an order"));

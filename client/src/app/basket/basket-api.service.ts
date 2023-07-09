@@ -16,7 +16,6 @@ export class BasketApiService {
         .pipe(
           map((response: IBasket) => {
               this.basketSource.next(response);
-              console.log(this.getValue());
           })
         );
     }
@@ -26,7 +25,6 @@ export class BasketApiService {
         .subscribe( (response: IBasket) => {
           this.basketSource.next(response);
           console.log('Basket is updated');
-          console.log(this.getValue());
         }, error => {
             console.log(error);
         });

@@ -10,11 +10,12 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class BasketService extends BasketApiService {
-  localStorage_basket_name = "basket_id";
+    localStorage_basket_name = "basket_id";
 
-  private basketTotalsSource = new BehaviorSubject<IOrderTotals>(null);
-  basketTotals$ = this.basketTotalsSource.asObservable();
-  shipping = 0;
+    private priceTotalsSource = new BehaviorSubject<IOrderTotals>(null);
+    priceTotals$ = this.priceTotalsSource.asObservable();
+
+    shipping: number;
 
     constructor(client: HttpClient) {
       super(client);
@@ -30,6 +31,10 @@ export class BasketService extends BasketApiService {
 
     public getBasketId(): string {
       return this.getValue().id;
+    }
+
+    public getTotalSum(): number {
+      return this.priceTotalsSource.getValue().total;
     }
 
     public addItem(product: Product, quantity: number = 1 ): void {
@@ -78,14 +83,9 @@ export class BasketService extends BasketApiService {
       }
     }
 
-    public setShipping(shippingCost: number) : void {
-      this.shipping = shippingCost;
-      this.calculateTotals();
-    }
-
     public clearBasket(): void {
       this.basketSource.next(null);
-      this.basketTotalsSource.next(null);
+      this.priceTotalsSource.next(null);
       localStorage.removeItem(this.localStorage_basket_name);
 
       this.init();
@@ -123,12 +123,15 @@ export class BasketService extends BasketApiService {
       return localStorage.getItem(this.localStorage_basket_name) ?? uuidv4();
     }
 
-    private calculateTotals(): void {
+    public calculateTotals(): void {
       const basket = this.getValue();
-      const shipping = this.shipping;
-      const subtotal = basket.items.reduce( (val, cur) => (cur.price * cur.quantity) + val, 0);
-      const total = shipping + subtotal;
-      this.basketTotalsSource.next({shipping, subtotal, total});
+
+      if (basket) {
+        const shipping = this.shipping;
+        const subtotal = basket.items.reduce( (val, cur) => (cur.price * cur.quantity) + val, 0);
+        const total = shipping + subtotal;
+        this.priceTotalsSource.next({shipping, subtotal, total});
+      }
     }
 
     private mapProductToBasketItem(product: Product, quantity: number): IBasketItem{

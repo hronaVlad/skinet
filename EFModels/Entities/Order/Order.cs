@@ -24,8 +24,7 @@
         public OrderStatus Status { get; set; } = OrderStatus.Panding;
         
         public List<OrderItem> Items { get; set; }
-        public string PaymentIntentId { get; set; }
-        public string PaymentClientSecret { get; set; }
+        public string? PaymentIntentId { get; set; }
         public decimal SubTotal { get; set; }
 
         public int DeliveryMethodId { get; set; }

@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class StepperComponent extends CdkStepper implements OnInit {
 
   ngOnInit(): void {
-    this.linear = false;
+    this.linear = true;
   }
 
   onClick(index: number) {

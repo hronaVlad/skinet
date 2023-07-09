@@ -33,7 +33,7 @@ namespace Core.Services
             };
         }
 
-        public async Task UpdateIntentAsync(string intentId, long priceTotal)
+        public async Task<StripeIntentResponse> UpdateIntentAsync(string intentId, long priceTotal)
         {
             var options = new PaymentIntentUpdateOptions
             {
@@ -47,6 +47,13 @@ namespace Core.Services
             {
                 throw new Exception("Failed to get a payment intent");
             }
+
+            return new StripeIntentResponse
+            {
+                IntentId = paymentIntent.Id,
+                ClientSecret = paymentIntent.ClientSecret,
+                Status = paymentIntent.Status
+            };
         }
 
     }

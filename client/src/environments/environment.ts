@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:7154/api/'
+  apiUrl: 'https://localhost:7154/api/',
+  StripePublishableKey: 'pk_test_51NG5d3F30XCih4jDEXbsQPFGpVdipREMe7k3P6aM9IAvhHVTFjueMBCtSA7EmAVI6pqrt231r1Uwe7O4CLsMYkEU00w9PCuo1q'
 };
 
 /*

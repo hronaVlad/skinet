@@ -43,7 +43,7 @@
     Go to Basket
   </button>
 
-  <button class="btn btn-primary" cdkStepperNext [disabled]="!(checkoutForm.get('addressForm')).valid">
+  <button class="btn btn-primary" cdkStepperNext [disabled]="(checkoutForm.get('addressForm')).invalid">
     Go to Delivery
     <i class="fa fa-angle-right"></i>
   </button>

@@ -7,7 +7,7 @@ namespace Core.Services.Contracts
 {
     public interface IOrderService
     {
-        Task<Order> CreateOrderAsync(string email, CustomerBasket basket, int deliverMethodId, AddressDto address);
+        Task<Order> CreateOrderAsync(string email, CustomerBasket basket, int deliverMethodId, AddressDto address, string intnetId);
         Task<IReadOnlyList<Order>> GetAllAsync(string email);
         Task<Order> GetByIdAsync(int id, string email);
         Task<IReadOnlyList<DeliveryMethod>> GetDeliveryMethodAsync();

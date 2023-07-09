@@ -1,10 +1,10 @@
 
    <header>
-      <div class="d-flex flex-column flex-md-row align-items-center justify-content-between 
+      <div class="d-flex flex-column flex-md-row align-items-center justify-content-between
       p-3 mb-3 border-bottom shadow-sm fixed-top bg-white">
-        
+
         <img src="/assets/images/logo.png" style="max-height: 70px" alt="logo" class="logo" routerLink="/">
-  
+
         <nav class="my-2 my-md-0 mr-md-3 text-uppercase" style="font-size:larger">
           <a class="me-3 py-2" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
           <a class="me-3 py-2" routerLink="/shop" routerLinkActive="active">Shop</a>
@@ -20,7 +20,6 @@
             <!-- no user -->
             <ng-container  *ngIf="(user$ | async) === null">
               <a routerLink="/account/login" class="btn btn-outline-secondary" style="margin-right: 10px;">Login</a>
-              <!-- <a routerLink="/account/register" class="btn btn-outline-secondary">Sign up</a> -->
             </ng-container>
 
             <!-- user -->
@@ -31,7 +30,7 @@
                 </a>
                 <div *dropdownMenu class="dropdown-menu dropdown-menu-right" style="cursor: pointer;">
                     <a class="dropdown-item align-items-center py-2" routerLink="/basket">
-                      <i class="fa fa-shopping-cart ms-2"></i> 
+                      <i class="fa fa-shopping-cart ms-2"></i>
                       <span class="ms-3">View Basket</span>
                     </a>
 
@@ -39,14 +38,14 @@
                       <i class="fa fa-history ms-2"></i>
                       <span class="ms-3">View Orders</span>
                     </a>
-                  
+
                   <div class="divider dropdown-divider"></div>
 
                   <a class="dropdown-item align-items-center py-2" (click)="logout()">
                     <i class="fa fa-sign-out ms-2"></i>
                     <span class="ms-3">Logout</span>
                   </a>
-                  
+
                 </div>
               </div>
 

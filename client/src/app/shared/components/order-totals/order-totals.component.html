@@ -2,18 +2,18 @@
     Order Summary
 </div>
 <div class="p-2">
-    <ul class="list-unstyled mb-4" *ngIf="orderTotals">
+    <ul class="list-unstyled mb-4" *ngIf="priceTotals">
         <li class="d-flex justify-content-between py-3 border-bottom">
             <strong class="text-muted">Order subtotal</strong>
-            <strong>{{orderTotals.subtotal | currency}}</strong>
+            <strong>{{priceTotals.subtotal | currency}}</strong>
         </li>
         <li class="d-flex justify-content-between py-3 border-bottom">
             <strong class="text-muted">Shipping</strong>
-            <strong>{{orderTotals.shipping | currency}}</strong>
+            <strong>{{priceTotals.shipping | currency}}</strong>
         </li>
         <li class="d-flex justify-content-between py-3 border-bottom">
             <strong class="text-muted">Total</strong>
-            <strong>{{orderTotals.total | currency}}</strong>
+            <strong>{{priceTotals.total | currency}}</strong>
         </li>
     </ul>
 </div>

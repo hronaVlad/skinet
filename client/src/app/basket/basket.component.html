@@ -16,7 +16,10 @@
 
       <div class="row" *ngIf="basket.items && basket.items.length > 0">
         <div class="col-6 offset-6">
-          <order-totals></order-totals>
+          <ng-container *ngIf="(priceTotals$ | async) as priceTotals">
+            <order-totals [priceTotals]="priceTotals" ></order-totals>
+          </ng-container>
+
           <a routerLink="/checkout" class="btn btn-outline-secondary btn-block" style="width: 100%;">Proceed to checkout</a>
         </div>
       </div>

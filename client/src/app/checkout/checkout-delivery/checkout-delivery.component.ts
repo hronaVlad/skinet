@@ -17,26 +17,17 @@ export class CheckoutDeliveryComponent implements OnInit {
   constructor(private checkoutService: CheckoutService, private basketService: BasketService) { }
 
   ngOnInit(): void {
-    this.checkoutService.getDeliveryMethods().subscribe( _ => {
-      this.deliveryMethods = _;
+    this.loadDeliveryMethods();
+  }
 
-       this.selectRadioOption();
+  public setDeliveryMethod(deliveryMethod: IDeliveryMethod): void {
+    this.checkoutService.setShipping(deliveryMethod);
+  }
+
+  private loadDeliveryMethods() {
+    this.checkoutService.getDeliveryMethods().subscribe( {
+      next: data => this.deliveryMethods = data,
+      error: error => console.log(error)
     });
-  }
-
-  setDeliveryMethod(deliveryMethod: IDeliveryMethod): void {
-    this.basketService.setShipping(deliveryMethod.price);
-  }
-
-  public selectRadioOption(): void {
-    const first = this.deliveryMethods[0];
-
-    console.log(first.id)
-
-    const control = this.checkoutForm.get('deliveryForm').get('deliveryMethod');
-    control.setValue(first.id);
-    control.markAsTouched();
-
-
   }
 }

@@ -22,7 +22,7 @@ namespace API.Services
             _mapper = mapper;
         }
 
-        public async Task<Order> CreateOrderAsync(string email, CustomerBasket basket, int deliverMethodId, AddressDto addressDto)
+        public async Task<Order> CreateOrderAsync(string email, CustomerBasket basket, int deliverMethodId, AddressDto addressDto, string intnetId)
         {
             var deliveryMethod = await _unitOfWork.GetRepository<DeliveryMethod>().GetByIdAsync(deliverMethodId);
             var address = _mapper.Map<Address>(addressDto);
@@ -42,17 +42,23 @@ namespace API.Services
 
             var subTotal = items.Sum(_ => _.Price * _.Quantity);
 
-            var order = new Order(email, address, deliveryMethod, items, "", subTotal);
+            try
+            {
+                var order = new Order(email, address, deliveryMethod, items, intnetId, subTotal);
 
-            _unitOfWork.GetRepository<Order>().Add(order);
+                _unitOfWork.GetRepository<Order>().Add(order);
 
-            var result = await _unitOfWork.CompleteAsync();
+                var result = await _unitOfWork.CompleteAsync();
 
-            if (result <= 0) return null;
+                if (result <= 0) return null;
 
-            await _basketRepository.DeleteAsync(basket.Id);
+                await _basketRepository.DeleteAsync(basket.Id);
 
-            return order;
+                return order;
+            }
+            catch(Exception ex) {
+                throw;
+            }
         }
 
         public async Task<IReadOnlyList<Order>> GetAllAsync(string email)
