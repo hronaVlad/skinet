@@ -1,0 +1,12 @@
+<p>observables works!</p>
+
+  <input [formControl]="input" type="text" class="form-control" placeholder="type here" >
+
+
+  <ul *ngIf="ponies.length > 0">
+   <li *ngFor="let p of ponies">
+     <b>{{p}}</b>
+   </li>
+ </ul>
+
+

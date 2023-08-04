@@ -10,11 +10,18 @@ import { CheckoutService } from './checkout/checkout.service';
 })
 export class AppComponent  implements OnInit{
 
+  private enableInitialization = true;
+
   constructor(private basketService: BasketService, private accountService: AccountService, private checkoutService: CheckoutService) {}
 
   ngOnInit(): void {
-    this.basketService.init();
-    this.checkoutService.init();
-    this.accountService.loadUser();
+
+    if(this.enableInitialization) {
+      this.basketService.init();
+      this.checkoutService.init();
+      this.accountService.loadUser();
+    }
+
+
   }
 }

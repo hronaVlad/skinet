@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { Brand } from '../shared/models/brands';
 import { Type } from '../shared/models/types';
 import { Pagination } from '../shared/models/pagination';
@@ -35,8 +35,13 @@ export class ShopService {
     params = params.set('pageIndex', filterParams.pageIndex);
     params = params.set('pageSize', filterParams.pageSize);
 
-    return this.client.get<Pagination>(this.url + 'products', { params});
-  } 
+    return this.client.get<Pagination>(this.url + 'products', { params})
+    .pipe (
+      map( (data:Pagination) => {
+        return data;
+      })
+    );
+  }
 
   getTypes(): Observable<Type[]> {
     return this.client.get<Type[]>(this.url + 'products/types');

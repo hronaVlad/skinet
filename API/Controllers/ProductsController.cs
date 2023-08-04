@@ -1,3 +1,4 @@
+using API.Infrastucture.Attributes;
 using API.Infrastucture.Errors;
 using AutoMapper;
 using Common.Helpers;
@@ -28,6 +29,7 @@ public class ProductsController : BaseApiController
         this._mapper = mapper;
     }
 
+    [Cached]
     [HttpGet]
     [ProducesResponseType(typeof(Pagination<ProductToReturnDto>), 200)]
     public async Task<ActionResult<List<ProductToReturnDto>>> GetProducts([FromQuery]ProductSpecParams productParams)

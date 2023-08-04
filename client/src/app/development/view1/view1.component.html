@@ -1,0 +1,37 @@
+<div class="container mt-3">
+  <p>view1 works!</p>
+
+
+  <input #name type="text" placeholder="name" value="I want to get this element"/>
+
+  <div class="row mt-3">
+    <div class="col-6" *ngFor="let pony of ponies"  [class]="selectedPony && selectedPony === pony.name ? 'bg-success': ''">
+      <app-pony (onSelected)="onPonySelected($event)"  [name]="pony.name" [info]="pony.info" class="" >
+          <div class="h1">content with class h1 </div>
+          <div class="h2">content with class h2</div>
+      </app-pony>
+    </div>
+  </div>
+
+
+  <app-tabs>
+    <app-tab-item title="Home"></app-tab-item>
+    <app-stub>
+      <app-tab-item title="Contacts"></app-tab-item>
+    </app-stub>
+
+  </app-tabs>
+
+  <!-- <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" >Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link">Contacts</a>
+    </li>
+  </ul> -->
+
+
+</div>
+
+

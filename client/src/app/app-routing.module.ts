@@ -5,6 +5,7 @@ import { ServerErrorComponent } from './core/server-error/server-error.component
 import { HomeComponent } from './home/home.component';
 import { TestErrorComponent } from './test-error/test-error.component';
 import { AuthGuard } from './core/guards/auth.guard';
+import { MainPageComponent } from './development/main-page/main-page.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent,  data: { breadcrumb: 'Home'} },
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'account', loadChildren: () => import('./account/account.module').then(_ => _.AccountModule), data: {breadcrumb: 'Account'}},
   {path: 'orders', loadChildren: () => import('./orders/orders.module').then(_ => _.OrderModule), data: {breadcrumb: 'Orders'},
     canActivate: [AuthGuard]},
+  {path: 'development', component: MainPageComponent, data: {breadcrumb: 'Development'}},
   {path: '**', redirectTo: '', pathMatch: 'full'}
 ];
 
